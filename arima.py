@@ -13,20 +13,21 @@ def begin():
     # load pickled logistic regression model
     arima_model = pickle.load(open("Arima_model.sav", "rb"))
 
-def action(data):
+def action(n):
+    global df_forecast, df_conf
     
-    # Turn data into DataFrame
-    data = pd.DataFrame([data])
+    forecast,conf_int = stepwise_model.predict(n_periods=30,return_conf_int=True)
+    df_forecast = pd.DataFrame(forecast,columns=['close_pred'])
+    df_conf = pd.DataFrame(conf_int,columns= ['Upper_bound','Lower_bound'])
     
-    data["forecasted"] = arima_model.predict(n_periods=30)
-    
-    yield data.to_dict(orient="records")
+    yield df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")
 
-def metrics(data):
+def metrics(test):
     # Turn data into DataFrame
-    data = pd.DataFrame([data])
+    data = pd.DataFrame([test])
+    
     y_true = data['Close']
-    y_pred = ['forecasted']
+    y_pred = df_forecast
     def mean_absolute_percentage_error(y_true, y_pred): 
         y_true, y_pred = np.array(y_true), np.array(y_pred)
         return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
