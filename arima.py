@@ -16,11 +16,11 @@ def begin():
 def action(n):
     global df_forecast, df_conf
     
-    forecast,conf_int = stepwise_model.predict(n_periods=n,return_conf_int=True)
+    forecast,conf_int = arima_model.predict(n_periods=n,return_conf_int=True)
     df_forecast = pd.DataFrame(forecast,columns=['close_pred'])
     df_conf = pd.DataFrame(conf_int,columns= ['Upper_bound','Lower_bound'])
     
-    yield df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")
+    return df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")
 
 def metrics(test):
     # Turn data into DataFrame
