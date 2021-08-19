@@ -20,7 +20,7 @@ def action(n):
     df_forecast = pd.DataFrame(forecast,columns=['close_pred'])
     df_conf = pd.DataFrame(conf_int,columns= ['Upper_bound','Lower_bound'])
     
-    return df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")
+    yield df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")
 
 def metric(test):
     # Turn data into DataFrame
