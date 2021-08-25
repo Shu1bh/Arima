@@ -24,6 +24,7 @@ def action():
     yield [df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")]
 
 def metric(test):
+    global df_forecast
     # Turn data into DataFrame
     data = pd.DataFrame(test)
     
