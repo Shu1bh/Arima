@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 from sklearn import metrics
 
+
 # modelop.init
 def begin():
     
@@ -37,6 +38,7 @@ def metric(test):
     print(f'RMSE is : {np.sqrt(metrics.mean_squared_error(y_true, y_pred))}')
     print(f'MAPE is : {mean_absolute_percentage_error(y_true, y_pred)}')
     print(f'R2 is : {metrics.r2_score(y_true, y_pred)}',end='\n\n')
-    yield {'MSE':metrics.mean_squared_error(y_true, y_pred),'MAE': metrics.mean_absolute_error(y_true, y_pred),
+    result = {'MSE':metrics.mean_squared_error(y_true, y_pred),'MAE': metrics.mean_absolute_error(y_true, y_pred),
            'RMSE':np.sqrt(metrics.mean_squared_error(y_true, y_pred)), 'MAPE':mean_absolute_percentage_error(y_true, y_pred),
            'R2':metrics.r2_score(y_true, y_pred)}
+    yield result
