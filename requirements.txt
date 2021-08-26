@@ -3,3 +3,11 @@ sklearn
 statsmodels==0.12.2
 pandas==1.0.3
 numpy==1.19.5
+
+import Algorithmia
+
+input = "data://bny_poc/ts_analysis_input/FB2.csv"
+client = Algorithmia.client('sim9u8BOYyUnw0TqnMU2OQjzjEO1', 'https://api.bnymellon.productionize.ai')
+algo = client.algo('AbhineetKumar/ts_analysis/0.2.3')
+algo.set_options(timeout=300) # optional
+print(algo.pipe(input).result)
