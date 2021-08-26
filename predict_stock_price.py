@@ -24,7 +24,9 @@ def action():
     yield [df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")]
 
 def metric(test):
-    global df_forecast
+    #global df_forecast
+    forecast,conf_int = arima_model.predict(n_periods=30,return_conf_int=True)
+    df_forecast = pd.DataFrame(forecast,columns=['close_pred'])
     # Turn data into DataFrame
     data = pd.DataFrame(test)
     
