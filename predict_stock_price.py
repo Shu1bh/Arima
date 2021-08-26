@@ -14,7 +14,7 @@ def begin():
     # load pickled logistic regression model
     arima_model = pickle.load(open("Arima_model.pickle", "rb"))
 
-def action():
+def action(sample):
     global df_forecast, df_conf
     
     forecast,conf_int = arima_model.predict(n_periods=30,return_conf_int=True)
