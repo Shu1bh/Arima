@@ -13,7 +13,8 @@ def begin():
     
     # load pickled logistic regression model
     arima_model = pickle.load(open("Arima_model.pickle", "rb"))
-
+    
+# model.score
 def action(sample):
     global df_forecast, df_conf
     
@@ -23,6 +24,7 @@ def action(sample):
     
     yield [df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")]
 
+  # model.metric
 def metric(test):
     #global df_forecast
     forecast,conf_int = arima_model.predict(n_periods=30,return_conf_int=True)
