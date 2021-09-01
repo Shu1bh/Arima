@@ -24,7 +24,7 @@ def action(sample):
     
     yield [df_forecast.to_dict(orient="records"),df_conf.to_dict(orient="records")]
 
-  # model.metrics
+  # modelop.metrics
 def metric(test):
     #global df_forecast
     forecast,conf_int = arima_model.predict(n_periods=30,return_conf_int=True)
